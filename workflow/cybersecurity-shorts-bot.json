@@ -1,6 +1,4 @@
 {
-  "name": "Cybersecurity Shorts Bot",
-  "description": null,
   "active": false,
   "isArchived": false,
   "nodes": [
@@ -1486,13 +1484,6 @@
     "callerPolicy": "workflowsFromSameOwner",
     "binaryMode": "separate"
   },
-  "staticData": {
-    "node:Every 8 Hours": {
-      "recurrenceRules": []
-    }
-  },
-  "nodeGroups": [],
-  "pinData": {},
   "activeVersionId": "38025349-f8b5-453d-a10f-a9535138c858",
   "versionCounter": 92,
   "triggerCount": 1,
