@@ -1493,7 +1493,6 @@
   },
   "nodeGroups": [],
   "pinData": {},
-  "versionId": "38025349-f8b5-453d-a10f-a9535138c858",
   "activeVersionId": "38025349-f8b5-453d-a10f-a9535138c858",
   "versionCounter": 92,
   "triggerCount": 1,
@@ -1501,17 +1500,13 @@
     {
       "updatedAt": "2026-05-25T14:18:27.914Z",
       "createdAt": "2026-05-25T14:18:27.914Z",
-      "role": "workflow:owner",
-      "workflowId": "ncToDwUilbtazTxN",
-      "projectId": "XYYus2L9UHsUxp7J"
+      "role": "workflow:owner"
     }
   ],
   "tags": [],
   "activeVersion": {
     "updatedAt": "2026-06-01T21:06:23.593Z",
     "createdAt": "2026-06-01T21:06:23.593Z",
-    "versionId": "38025349-f8b5-453d-a10f-a9535138c858",
-    "workflowId": "ncToDwUilbtazTxN",
     "nodes": [
       {
         "parameters": {
@@ -2998,18 +2993,12 @@
       {
         "createdAt": "2026-06-01T21:06:23.932Z",
         "id": 152,
-        "workflowId": "ncToDwUilbtazTxN",
-        "versionId": "38025349-f8b5-453d-a10f-a9535138c858",
-        "event": "deactivated",
-        "userId": "d4304218-7c22-4760-9e89-7a3c77ca74fa"
+        "event": "deactivated"
       },
       {
         "createdAt": "2026-06-01T21:06:24.034Z",
         "id": 153,
-        "workflowId": "ncToDwUilbtazTxN",
-        "versionId": "38025349-f8b5-453d-a10f-a9535138c858",
-        "event": "activated",
-        "userId": "d4304218-7c22-4760-9e89-7a3c77ca74fa"
+        "event": "activated"
       }
     ]
   }
