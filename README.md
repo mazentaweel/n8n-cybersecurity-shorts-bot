@@ -1,9 +1,9 @@
 # n8n Cybersecurity Shorts Bot
 
-Fully automated YouTube Shorts pipeline that reads cybersecurity news from RSS
-feeds, generates a narration script with Groq (llama-3.3-70b-versatile), produces
-voice + subtitles with OmniVoice TTS, assembles a 9:16 video with FFmpeg, and
-uploads directly to YouTube — all orchestrated by n8n.
+Fully automated YouTube Shorts + TikTok pipeline that reads cybersecurity news
+from RSS feeds, generates a narration script with Groq (llama-3.3-70b-versatile),
+produces voice + subtitles with OmniVoice TTS, assembles a 9:16 video with FFmpeg,
+and cross-posts to YouTube and TikTok — all orchestrated by n8n.
 
 ---
 
@@ -68,10 +68,13 @@ Transfer Voice → Validate Voice           Build Download Commands
            Mark URL as Processed → Clear Override Topic
                        │
                        ▼
-           Build Telegram Message → Telegram Notification
+           Upload to TikTok
                        │
                        ▼
            Cleanup Temp Files
+                       │
+                       ▼
+           Build Telegram Message → Telegram Notification
 ```
 
 ---
