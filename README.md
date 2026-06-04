@@ -225,14 +225,55 @@ The script prompt is structured as exactly **12 sentences**:
 
 ## Scripts
 
-| Script                                | Machine   | Purpose                              |
-|---------------------------------------|-----------|--------------------------------------|
-| `scripts/machine-a/vtt2ass.py`        | Machine A | WebVTT → ASS subtitle conversion     |
-| `scripts/gpu-machine/omnivoice_tts.py`| GPU       | OmniVoice zero-shot TTS wrapper      |
-| `scripts/gpu-machine/kokoro_tts.py`   | GPU       | Kokoro ONNX TTS fallback             |
+| Script                                        | Deploy to | Purpose                                      |
+|-----------------------------------------------|-----------|----------------------------------------------|
+| `scripts/machine-a/vtt2ass.py`                | Machine A | WebVTT → ASS subtitle conversion (PlayResY=1920) |
+| `scripts/machine-a/assemble_video.sh`         | Machine A | FFmpeg: download clips, burn subs, mix audio |
+| `scripts/machine-a/generate_thumbnail.sh`     | Machine A | ImageMagick: split-panel or gradient thumbnail |
+| `scripts/gpu-machine/omnivoice_tts.py`        | GPU       | OmniVoice zero-shot TTS wrapper              |
+| `scripts/gpu-machine/kokoro_tts.py`           | GPU       | Kokoro ONNX TTS fallback                     |
+| `scripts/gpu-machine/musicgen_nightly.py`     | GPU       | Nightly MusicGen music generation pipeline   |
 
-Shell commands for video assembly, thumbnail generation, file transfer, and
-cleanup are embedded directly in the workflow's SSH nodes.
+### Deploying the scripts
+
+Copy each script to the `~` home directory of the relevant machine:
+
+```bash
+# Machine A
+scp scripts/machine-a/vtt2ass.py          user@machine-a:~/vtt2ass.py
+scp scripts/machine-a/assemble_video.sh   user@machine-a:~/assemble_video.sh
+scp scripts/machine-a/generate_thumbnail.sh user@machine-a:~/generate_thumbnail.sh
+chmod +x ~/assemble_video.sh ~/generate_thumbnail.sh   # on Machine A
+
+# GPU machine
+scp scripts/gpu-machine/omnivoice_tts.py     user@gpu:~/omnivoice_tts.py
+scp scripts/gpu-machine/kokoro_tts.py        user@gpu:~/kokoro_tts.py
+scp scripts/gpu-machine/musicgen_nightly.py  user@gpu:~/musicgen_nightly.py
+```
+
+### MusicGen nightly cron (GPU machine)
+
+```bash
+# Run at 03:00 every night
+0 3 * * * /home/YOUR_USER/new/OmniVoice/venv/bin/python3 /home/YOUR_USER/musicgen_nightly.py   --output-dir /mnt/machine_a_tmp/generated >> /home/YOUR_USER/musicgen.log 2>&1
+```
+
+Or as a systemd service with `Restart=always` — see the `[Service]` unit:
+
+```ini
+[Unit]
+Description=MusicGen nightly music generation
+
+[Service]
+Type=oneshot
+ExecStart=/home/YOUR_USER/new/OmniVoice/venv/bin/python3           /home/YOUR_USER/musicgen_nightly.py           --output-dir /mnt/machine_a_tmp/generated
+User=YOUR_USER
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Pair with a `.timer` unit to trigger at 03:00.
 
 ---
 
