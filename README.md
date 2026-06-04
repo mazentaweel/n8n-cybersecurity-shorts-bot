@@ -233,6 +233,7 @@ The script prompt is structured as exactly **12 sentences**:
 | `scripts/gpu-machine/omnivoice_tts.py`        | GPU       | OmniVoice zero-shot TTS wrapper              |
 | `scripts/gpu-machine/kokoro_tts.py`           | GPU       | Kokoro ONNX TTS fallback                     |
 | `scripts/gpu-machine/musicgen_nightly.py`     | GPU       | Nightly MusicGen music generation pipeline   |
+| `scripts/gpu-machine/comfyui_bg.py`            | GPU       | ComfyUI txt2img for thumbnail backgrounds    |
 
 ### Deploying the scripts
 
