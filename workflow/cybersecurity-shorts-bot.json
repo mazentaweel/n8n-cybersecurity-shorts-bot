@@ -611,7 +611,7 @@
         -656,
         704
       ],
-      "webhookId": "96a95c8b-1d40-437f-8ca5-18ebc5a28216",
+      "webhookId": "00000000-0000-0000-0000-000000000000",
       "credentials": {
         "telegramApi": {
           "id": "YOUR_TELEGRAM_CRED_ID",
@@ -707,7 +707,7 @@
           "name": "Telegram account"
         }
       },
-      "webhookId": "db329182-cac8-4f3e-a56b-78c87e1b6e3c"
+      "webhookId": "00000000-0000-0000-0000-000000000000"
     },
     {
       "parameters": {},
@@ -1491,7 +1491,6 @@
       "recurrenceRules": []
     }
   },
-  "meta": null,
   "nodeGroups": [],
   "pinData": {},
   "versionId": "38025349-f8b5-453d-a10f-a9535138c858",
@@ -1504,17 +1503,7 @@
       "createdAt": "2026-05-25T14:18:27.914Z",
       "role": "workflow:owner",
       "workflowId": "ncToDwUilbtazTxN",
-      "projectId": "XYYus2L9UHsUxp7J",
-      "project": {
-        "updatedAt": "2025-08-05T18:03:45.423Z",
-        "createdAt": "2025-08-05T18:02:26.822Z",
-        "id": "XYYus2L9UHsUxp7J",
-        "name": "Mazen Taweel <mazen.taweel3@gmail.com>",
-        "type": "personal",
-        "icon": null,
-        "description": null,
-        "creatorId": "d4304218-7c22-4760-9e89-7a3c77ca74fa"
-      }
+      "projectId": "XYYus2L9UHsUxp7J"
     }
   ],
   "tags": [],
@@ -2131,7 +2120,7 @@
           -656,
           704
         ],
-        "webhookId": "96a95c8b-1d40-437f-8ca5-18ebc5a28216",
+        "webhookId": "00000000-0000-0000-0000-000000000000",
         "credentials": {
           "telegramApi": {
             "id": "YOUR_TELEGRAM_CRED_ID",
@@ -2227,7 +2216,7 @@
             "name": "Telegram account"
           }
         },
-        "webhookId": "db329182-cac8-4f3e-a56b-78c87e1b6e3c"
+        "webhookId": "00000000-0000-0000-0000-000000000000"
       },
       {
         "parameters": {},

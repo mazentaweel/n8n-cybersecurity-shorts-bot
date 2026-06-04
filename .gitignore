@@ -1,0 +1,19 @@
+# TikTok session cookies — NEVER commit this file
+tiktok_cookies.json
+*.cookies.json
+
+# Environment / secrets
+.env
+.env.*
+secrets.json
+config.local.json
+
+# n8n local exports (may contain credentials)
+*.n8n.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+__pycache__/
+*.pyc
