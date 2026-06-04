@@ -234,6 +234,7 @@ The script prompt is structured as exactly **12 sentences**:
 | `scripts/gpu-machine/kokoro_tts.py`           | GPU       | Kokoro ONNX TTS fallback                     |
 | `scripts/gpu-machine/musicgen_nightly.py`     | GPU       | Nightly MusicGen music generation pipeline   |
 | `scripts/gpu-machine/comfyui_bg.py`            | GPU       | ComfyUI txt2img for thumbnail backgrounds    |
+| `scripts/gpu-machine/tiktok_upload_v2.py`      | GPU       | TikTok upload via Playwright browser automation |
 
 ### Deploying the scripts
 
@@ -277,6 +278,58 @@ WantedBy=multi-user.target
 Pair with a `.timer` unit to trigger at 03:00.
 
 ---
+
+## TikTok Upload
+
+The `Upload to TikTok` n8n node SSHs into the GPU machine and calls
+`tiktok_upload_v2.py`. It runs with a 300-second timeout and looks for
+`TIKTOK_SUCCESS` in stdout to confirm the post went through.
+
+### How it works
+
+TikTok has no public upload API for regular accounts. The script uses
+**[tiktok-uploader](https://github.com/wkaisertexas/tiktok-uploader)**,
+a Python library that drives a headless Chromium browser via **Playwright**
+to upload video exactly as a human would — navigating to the upload page,
+filling in the caption, and clicking Post.
+
+Authentication is cookie-based: you export your TikTok session cookies once
+from a logged-in browser and save them as `tiktok_cookies.json`. The script
+loads those cookies into Playwright's browser context so TikTok sees an
+already-authenticated session.
+
+### Install prerequisites (GPU machine)
+
+```bash
+pip install tiktok-uploader playwright
+playwright install chromium
+```
+
+### Export your TikTok session cookies (one-time)
+
+**Option A — Cookie-Editor extension (Chrome/Firefox):**
+1. Log in to TikTok in your browser.
+2. Install the [Cookie-Editor](https://cookie-editor.com/) extension.
+3. On `tiktok.com`, open Cookie-Editor → **Export → Export as JSON**.
+4. Save the file to the GPU machine as `~/tiktok_cookies.json`.
+
+**Option B — tiktok-uploader's built-in helper:**
+```bash
+python3 -c "
+from tiktok_uploader.auth import AuthBackend
+AuthBackend().save_cookies('tiktok_cookies.json')
+"
+```
+A browser window opens — log in manually, then close it.
+
+### Security
+
+`tiktok_cookies.json` grants full access to your TikTok account.
+- **Never commit it to git** — add it to `.gitignore`.
+- Rotate by logging out of TikTok on the device you used to export.
+- Set `TIKTOK_HEADFUL=1` on the GPU machine if you need to watch the browser
+  session during debugging.
+
 
 ## License
 
